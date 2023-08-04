@@ -8,7 +8,7 @@
 #include "main.h"
 
 
-void httpPOST( uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , char*  , char* );
+int httpPOST( char*, char*, char*, uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t ,uint16_t , char*  , char*, int );
 
 /*
 POST /tepelco/ HTTP/1.1

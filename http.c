@@ -18,18 +18,28 @@ char ev5[]={',','"','c','i','c','l','o','_','e','v','5','"',':','\0'};
 char ev6[]={',','"','c','i','c','l','o','_','e','v','6','"',':','\0'};
 char ev7[]={',','"','c','i','c','l','o','_','e','v','7','"',':','\0'};
 char ev8[]={',','"','c','i','c','l','o','_','e','v','8','"',':','\0'};
+char deviceId[]={',','"','d','e','v','I','d','"',':','\0'};
 
 
 
 
 
-httpPOST(uint16_t dp_cartucho, uint16_t dp_filtro, uint16_t ciclo_ev1, uint16_t ciclo_ev2,uint16_t ciclo_ev3,uint16_t ciclo_ev4,uint16_t ciclo_ev5,uint16_t ciclo_ev6,uint16_t ciclo_ev7,uint16_t ciclo_ev8, char  * post, char * body)
+httpPOST(char * endpoint, char* server_ip, char * port,uint16_t dp_cartucho, uint16_t dp_filtro, uint16_t ciclo_ev1, uint16_t ciclo_ev2,uint16_t ciclo_ev3,uint16_t ciclo_ev4,uint16_t ciclo_ev5,uint16_t ciclo_ev6,uint16_t ciclo_ev7,uint16_t ciclo_ev8, uint16_t devId, char  * post, char * body, int max_char)
 {
 	post[0]='\0';
 	body[0]='\0';
-	strncat(post,"POST /tepelco/ HTTP/1.1",strlen("POST /tepelco/ HTTP/1.1"));
+	strncat(post,"POST ",strlen("POST "));
+	strncat(post,endpoint,strlen(endpoint));
+	strncat(post,"/ HTTP/1.1",strlen("/ HTTP/1.1"));
 	strncat(post,"\r\n",strlen("\r\n"));
-	strncat(post,"Host: 192.168.0.91:8000",strlen("Host: 192.168.0.91:8000"));
+
+	strncat(post,"Host: ",strlen("Host: "));
+	strncat(post,server_ip,strlen(server_ip));
+	strncat(post,":",1);
+	strncat(post,port,strlen(port));
+
+
+
 	strncat(post,"\r\n",strlen("\r\n"));
 	strncat(post,"Content-Type: application/JSON",strlen("Content-Type: application/JSON"));
 	strncat(post,"\r\n",strlen("\r\n"));
@@ -67,6 +77,9 @@ httpPOST(uint16_t dp_cartucho, uint16_t dp_filtro, uint16_t ciclo_ev1, uint16_t 
 	char _ev8[8];
 	_ev8[0]='\0';
 	INTOA( ciclo_ev8, _ev8);
+	char _devId[8];
+	_devId[0]='\0';
+	INTOA(devId, _devId);
 
 	strncat(body,cartucho,strlen(cartucho));
 	strncat(body,_cartucho,strlen(_cartucho));
@@ -88,13 +101,24 @@ httpPOST(uint16_t dp_cartucho, uint16_t dp_filtro, uint16_t ciclo_ev1, uint16_t 
 	strncat(body,_ev7,strlen(_ev7));
 	strncat(body,ev8,strlen(ev8));
 	strncat(body,_ev8,strlen(_ev8));
+	strncat(body,deviceId,strlen(deviceId));
+	strncat(body,_devId,strlen(_devId));
+
 	strncat(body,"}",strlen("}"));
 
 	char length[5];
 	INTOA(strlen(body), length);
 	strncat(post,length,strlen(length));
 	strncat(post,"\r\n\r\n",strlen("\r\n\r\n"));
-	strncat(post,body,strlen(body));
+	if(strlen(body) < max_char)
+	{
+		strncat(post,body,strlen(body));
+		return 1 ;
+	}
+		else
+		{
+			return 0;
+		}
 }
 
 //int INTOA( int a,  unsigned char *v1)   Content-Length:
