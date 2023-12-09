@@ -18,6 +18,7 @@ char ev5[]={',','"','c','i','c','l','o','_','e','v','5','"',':','\0'};
 char ev6[]={',','"','c','i','c','l','o','_','e','v','6','"',':','\0'};
 char ev7[]={',','"','c','i','c','l','o','_','e','v','7','"',':','\0'};
 char ev8[]={',','"','c','i','c','l','o','_','e','v','8','"',':','\0'};*/
+
 char dd1[]={'{','"','d','1','"',':','\0'};
 char dd2[]={',','"','d','2','"',':','\0'};
 char dd3[]={',','"','d','3','"',':','\0'};
@@ -28,6 +29,29 @@ char dd7[]={',','"','d','7','"',':','\0'};
 char dd8[]={',','"','d','8','"',':','\0'};
 char dd9[]={',','"','d','9','"',':','\0'};
 char dd10[]={',','"','d','1','0','"',':','\0'};
+char dd11[]={',','"','d','1','1','"',':','\0'};
+char dd12[]={',','"','d','1','2','"',':','\0'};
+char dd13[]={',','"','d','1','3','"',':','\0'};
+char dd14[]={',','"','d','1','4','"',':','\0'};
+char dd15[]={',','"','d','1','5','"',':','\0'};
+char dd16[]={',','"','d','1','6','"',':','\0'};
+
+char data[][10]={{'{','"','d','1','"',':','\0'},
+				 {',','"','d','2','"',':','\0'},
+				 {',','"','d','3','"',':','\0'},
+				 {',','"','d','4','"',':','\0'},
+				 {',','"','d','5','"',':','\0'},
+				 {',','"','d','6','"',':','\0'},
+				 {',','"','d','7','"',':','\0'},
+				 {',','"','d','8','"',':','\0'},
+				 {',','"','d','9','"',':','\0'},
+				 {',','"','d','1','0','"',':','\0'},
+				 {',','"','d','1','1','"',':','\0'},
+				 {',','"','d','1','2','"',':','\0'},
+				 {',','"','d','1','3','"',':','\0'},
+				 {',','"','d','1','4','"',':','\0'},
+				 {',','"','d','1','5','"',':','\0'},
+				 {',','"','d','1','6','"',':','\0'}};
 
 
 
@@ -133,6 +157,61 @@ httpPOST(char * endpoint, char* server_ip, char * port,uint16_t d1, uint16_t d2,
 
 	strncat(body,dd10,strlen(dd10));
 	strncat(body,_d10,strlen(_d10));
+
+	strncat(body,deviceId,strlen(deviceId));
+	strncat(body,_devId,strlen(_devId));
+
+	strncat(body,"}",strlen("}"));
+
+	char length[5];
+	INTOA(strlen(body), length);
+	strncat(post,length,strlen(length));
+	strncat(post,"\r\n\r\n",strlen("\r\n\r\n"));
+	if(strlen(body) < max_char)
+	{
+		strncat(post,body,strlen(body));
+		return 1 ;
+	}
+		else
+		{
+			return 0;
+		}
+}
+
+httpPOST2(char * endpoint, char* server_ip, char * port,  uint16_t * vect_data, int cdad, uint16_t devId, char  * post, char * body, int max_char)
+{
+	post[0]='\0';
+	body[0]='\0';
+	strncat(post,"POST ",strlen("POST "));
+	strncat(post,endpoint,strlen(endpoint));
+	strncat(post,"/ HTTP/1.1",strlen("/ HTTP/1.1"));
+	strncat(post,"\r\n",strlen("\r\n"));
+
+	strncat(post,"Host: ",strlen("Host: "));
+	strncat(post,server_ip,strlen(server_ip));
+	strncat(post,":",1);
+	strncat(post,port,strlen(port));
+
+
+
+	strncat(post,"\r\n",strlen("\r\n"));
+	strncat(post,"Content-Type: application/JSON",strlen("Content-Type: application/JSON"));
+	strncat(post,"\r\n",strlen("\r\n"));
+	strncat(post,"Content-Length:",strlen("Content-Length:"));
+
+	char _devId[8];
+	_devId[0]='\0';
+	INTOA(devId, _devId);
+
+	for (int i=0; i < cdad;i++)
+	{
+		char d[8];
+		FTOA(vect_data[i],d,1);
+		strncat(body,data[i],strlen(data[i]));
+		strncat(body,d,strlen(d));
+
+	}
+	// Conversión de datos recibido por ModBUS
 
 	strncat(body,deviceId,strlen(deviceId));
 	strncat(body,_devId,strlen(_devId));
