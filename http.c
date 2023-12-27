@@ -61,7 +61,7 @@ char deviceId[]={',','"','d','e','v','I','d','"',':','\0'};
 
 
 
-httpPOST(char * endpoint, char* server_ip, char * port,uint16_t d1, uint16_t d2, uint16_t d3, uint16_t d4,uint16_t d5,uint16_t d6,uint16_t d7,uint16_t d8,uint16_t d9,uint16_t d10, uint16_t devId, char  * post, char * body, int max_char)
+httpPOST(char * endpoint, char* server_ip, char * port,uint16_t d1, uint16_t d2, uint16_t d3, uint16_t d4,uint16_t d5,uint16_t d6,uint16_t d7,uint16_t d8,uint16_t d9,uint16_t d10, uint16_t d11,uint16_t d12,uint16_t d13,uint16_t d14,uint16_t d15,uint16_t d16, uint16_t devId, char  * post, char * body, int max_char)
 {
 	post[0]='\0';
 	body[0]='\0';
@@ -86,43 +86,67 @@ httpPOST(char * endpoint, char* server_ip, char * port,uint16_t d1, uint16_t d2,
 	// Conversión de datos recibido por ModBUS
 	char _d1[8];
 	_d1[0]='\0';
-	FTOA( d1,_d1,2);
+	INTOA( d1, _d1);//FTOA( d1,_d1,2);
 
 	char _d2[8];
 	_d2[0]='\0';
-	FTOA( d2, _d2,2);//INTOA( dp_filtro, _filtro);//
+	INTOA( d2, _d2);//FTOA( d2, _d2,2);//INTOA( dp_filtro, _filtro);//
 
 	char _d3[8];
 	_d3[0]='\0';
-	FTOA( d3, _d3,2);
+	INTOA( d3, _d3);//FTOA( d3, _d3,2);
 
 	char _d4[8];
 	_d4[0]='\0';
-	FTOA( d4, _d4,2);
+	INTOA( d4, _d4);//FTOA( d4, _d4,2);
 
 	char _d5[8];
 	_d5[0]='\0';
-	FTOA( d5, _d5,2);
+	INTOA( d5, _d5);//FTOA( d5, _d5,2);
 
 	char _d6[8];
 	_d6[0]='\0';
-	INTOA( d6, _d6);
+	INTOA( d6, _d6);//INTOA( d6, _d6);
 
 	char _d7[8];
 	_d7[0]='\0';
-	FTOA( d7, _d7,2);
+	INTOA( d7, _d7);//FTOA( d7, _d7,2);
 
 	char _d8[8];
 	_d8[0]='\0';
-	FTOA( d8, _d8,2);
+	INTOA( d8, _d8);//FTOA( d8, _d8,2);
 
 	char _d9[8];
 	_d9[0]='\0';
-	FTOA( d9, _d9,2);
+	INTOA( d9, _d9);//FTOA( d9, _d9,2);
 
 	char _d10[8];
 	_d10[0]='\0';
-	FTOA( d10, _d10,2);
+	INTOA( d10, _d10);//FTOA( d10, _d10,2);
+
+	char _d11[8];
+	_d11[0]='\0';
+	INTOA( d11, _d11);//FTOA( d11, _d11,2);
+
+	char _d12[8];
+	_d12[0]='\0';
+	INTOA( d12, _d12);//FTOA( d11, _d11,2);
+
+	char _d13[8];
+	_d13[0]='\0';
+	INTOA( d13, _d13);//FTOA( d11, _d11,2);
+
+	char _d14[8];
+	_d14[0]='\0';
+	INTOA( d14, _d14);//FTOA( d11, _d11,2);
+
+	char _d15[8];
+	_d15[0]='\0';
+	INTOA( d15, _d15);//FTOA( d11, _d11,2);
+
+	char _d16[8];
+	_d16[0]='\0';
+	INTOA( d16, _d16);//FTOA( d11, _d11,2);
 
 	char _devId[8];
 	_devId[0]='\0';
@@ -157,6 +181,24 @@ httpPOST(char * endpoint, char* server_ip, char * port,uint16_t d1, uint16_t d2,
 
 	strncat(body,dd10,strlen(dd10));
 	strncat(body,_d10,strlen(_d10));
+
+	strncat(body,dd11,strlen(dd11));
+	strncat(body,_d11,strlen(_d11));
+
+	strncat(body,dd12,strlen(dd12));
+	strncat(body,_d12,strlen(_d12));
+
+	strncat(body,dd13,strlen(dd13));
+	strncat(body,_d13,strlen(_d13));
+
+	strncat(body,dd14,strlen(dd14));
+	strncat(body,_d14,strlen(_d14));
+
+	strncat(body,dd15,strlen(dd15));
+	strncat(body,_d15,strlen(_d15));
+
+	strncat(body,dd16,strlen(dd16));
+	strncat(body,_d16,strlen(_d16));
 
 	strncat(body,deviceId,strlen(deviceId));
 	strncat(body,_devId,strlen(_devId));
