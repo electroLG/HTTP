@@ -244,14 +244,15 @@ httpPOST2(char * endpoint, char* server_ip, char * port,  uint16_t * vect_data, 
 	char _devId[8];
 	_devId[0]='\0';
 	INTOA(devId, _devId);
-
+	char d[8];
+	d[0]='\0';
 	for (int i=0; i < cdad;i++)
 	{
-		char d[8];
+		//char d[8];
 		FTOA(vect_data[i],d,1);
 		strncat(body,data[i],strlen(data[i]));
 		strncat(body,d,strlen(d));
-
+		d[0]='\0';
 	}
 	// Conversión de datos recibido por ModBUS
 
