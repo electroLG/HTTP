@@ -8,7 +8,9 @@
 #include "main.h"
 
 
-int httpPOST( char*, char*, char*, uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t ,uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t ,uint16_t , char*  , char*, int );
+
+
+int httpPOST( char*, char*, char*, uint16_t, uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t ,uint16_t , uint16_t , uint16_t , uint16_t , uint16_t , uint16_t ,uint16_t , char*  , char*, int );
 
 /*
 POST /tepelco/ HTTP/1.1
@@ -19,3 +21,4 @@ Content-Length:172
 {"dp_cartucho":220,"dp_filtro":1124,"ciclo_ev1":1234,"ciclo_ev2":1234,"ciclo_ev3":1234,"ciclo_ev4":1234,"ciclo_ev5":1234,"ciclo_ev6":1234,"ciclo_ev7":1234,"ciclo_ev8":1234}
 
 */
+int httpPOST2(char * , char* , char * ,  uint16_t * , uint8_t * ,int , uint16_t , char  * , char * , int );

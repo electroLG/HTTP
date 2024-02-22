@@ -58,9 +58,6 @@ char data[][10]={{'{','"','d','1','"',':','\0'},
 char deviceId[]={',','"','d','e','v','I','d','"',':','\0'};
 
 
-
-
-
 httpPOST(char * endpoint, char* server_ip, char * port,uint16_t d1, uint16_t d2, uint16_t d3, uint16_t d4,uint16_t d5,uint16_t d6,uint16_t d7,uint16_t d8,uint16_t d9,uint16_t d10, uint16_t d11,uint16_t d12,uint16_t d13,uint16_t d14,uint16_t d15,uint16_t d16, uint16_t devId, char  * post, char * body, int max_char)
 {
 	post[0]='\0';
@@ -220,7 +217,7 @@ httpPOST(char * endpoint, char* server_ip, char * port,uint16_t d1, uint16_t d2,
 		}
 }
 
-httpPOST2(char * endpoint, char* server_ip, char * port,  uint16_t * vect_data, int cdad, uint16_t devId, char  * post, char * body, int max_char)
+httpPOST2(char * endpoint, char* server_ip, char * port,  uint16_t * vect_data, uint8_t * decimal,int cdad, uint16_t devId, char  * post, char * body, int max_char)
 {
 	post[0]='\0';
 	body[0]='\0';
@@ -248,8 +245,7 @@ httpPOST2(char * endpoint, char* server_ip, char * port,  uint16_t * vect_data, 
 	d[0]='\0';
 	for (int i=0; i < cdad;i++)
 	{
-		//char d[8];
-		FTOA(vect_data[i],d,1);
+		FTOA(vect_data[i],d,decimal[i]);
 		strncat(body,data[i],strlen(data[i]));
 		strncat(body,d,strlen(d));
 		d[0]='\0';
